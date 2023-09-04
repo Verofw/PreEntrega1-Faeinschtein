@@ -42,9 +42,18 @@ function validacionEnvio (entrega) {
     return entrega;
 }
 
+function validacionTexto (entrada){
+    while (entrada== ``){
+        entrada= prompt (`Respuesta inválida, no se permiten campos vacios`)
+    }
+    return entrada;
+}
+
 nombreUsuario = prompt(`Bienvenidos a FDS Shop!\nPor favor, ingrese su nombre para personalizar su pedido:`);
+nombreUsuario= validacionTexto(nombreUsuario);
 do {
     nombreProducto = prompt(`Bienvenido/a ${nombreUsuario}! Qué producto quiere agregar al carrito?`);
+    nombreProducto= validacionTexto(nombreProducto);
     cantidad = +prompt(`Cuántas unidades quiere cargar?\nPor favor ingrese la cantidad en numeros`);
     cantidad = validacionCantidad(cantidad);
     precio = +prompt(`Ingrese precio de producto $`);
@@ -64,6 +73,7 @@ tipoRetiro= validacionEnvio(tipoRetiro);
 if (tipoRetiro == ENVIO) {
     tipoRetiro = alert(`Perfecto! A continuacion podrá ingresar el domicilio donde quiere recibir sus productos. Recuerde que el envío se paga al recibirlo y tiene una tardanza de aprox 5 días habiles`);
     domicilio = prompt(`Por favor ingresá el domicilio donde quiere recibir su pedido:\nCalle XXX, Localidad, cualquier dato de relevancia que considere mencionar`);
+    domicilio= validacionTexto(domicilio);
     alert(`${detalleProductos}\nLo recibirá en los próximos 7 dias hábiles en su domicilio de la calle ${domicilio}\nAgradecemos mucho su compra ${nombreUsuario}!`);
 } else {
     alert(`${detalleProductos}\nTu pedido estará disponible para retiro en los proximos 7 dias en nuestra sucursal ubicada en Av Corrientes 5485 de lunes a viernes de 9 a 18hrs\nAgradecemos mucho su compra ${nombreUsuario}!`)
