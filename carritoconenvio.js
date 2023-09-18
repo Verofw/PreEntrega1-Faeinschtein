@@ -65,12 +65,6 @@ function validacionTexto(entrada) {
     return entrada;
 }
 
-function buscarProducto (categoria){
-    const itemElegido = categoria.find((item) => {
-        return item.modelo === nombreModelo.toLowerCase() && item.talle === talle.toLowerCase() && item.color === color.toLowerCase()
-    });
-}
-
 //EMPIEZA LA PAG
 nombreUsuario = prompt(`Bienvenidos a FDS Shop!\nPor favor, ingrese su nombre para personalizar su pedido:`);
 nombreUsuario = validacionTexto(nombreUsuario);
@@ -98,8 +92,9 @@ do {
                     cantidad = +prompt(`Cuántas remeras de ${nombreModelo}, color ${color}, talle ${talle} deseas agregar al carrito?`); //podria ser una function creo, una vez resuelto tema carrito puedo subirla, porque se va a repetir para buzos y para todos los modelos
 
                     //PRUEBA CON FIND
-                    buscarProducto(RemerasArt);
-                    
+                    const itemElegido = RemerasArt.find((item) => {
+                        return item.modelo === nombreModelo.toLowerCase() && item.talle === talle.toLowerCase() && item.color === color.toLowerCase()
+                    });
                     if (itemElegido) {
                         const itemCarrito = {
                             nombre: itemElegido.nombre,
@@ -117,64 +112,96 @@ do {
                     } else {
                         alert("El producto seleccionado no existe en el catálogo.");
                     }
-            }
-            break;
-        case CARRIE:
+                }
+                break;
+            case CARRIE:
             talle = prompt(`Perfecto! Dentro de las remeras de ${RemerasCarrie[0].modelo} tenemos para ofrecerte
                     Talle:\n ${RemerasCarrie[0].talle} / ${RemerasCarrie[2].talle} / ${RemerasCarrie[4].talle} \n Ingresá la letra del talle elegido`);
-                    color = prompt(`Genial, enviaremos el talle ${talle}. Es momento de elegir el color de tu remera!\n ${RemerasCarrie[0].color} / ${RemerasCarrie[2].color}\n Ingresá el color que deseas agregar al carrito`);
-                    cantidad = +prompt(`Cuántas remeras de ${nombreModelo}, color ${color}, talle ${talle} deseas agregar al carrito?`); 
-                    const itemElegido = RemerasArt.find((remera) => {
-                        return remera.modelo === nombreModelo.toLowerCase() && remera.talle === talle.toLowerCase() && remera.color === color.toLowerCase()
-                    });
-                    if (itemElegido) {
-                        const itemCarrito = {
-                            nombre: itemElegido.nombre,
-                            talle: talle,
-                            color: color,
-                            cantidad: cantidad,
-                            precioUnitario: itemElegido.precio,
-                            subtotal: cantidad * itemElegido.precio
-                        };
+            color = prompt(`Genial, enviaremos el talle ${talle}. Es momento de elegir el color de tu remera!\n ${RemerasCarrie[0].color} / ${RemerasCarrie[2].color}\n Ingresá el color que deseas agregar al carrito`);
+            cantidad = +prompt(`Cuántas remeras de ${nombreModelo}, color ${color}, talle ${talle} deseas agregar al carrito?`);
+            const itemElegido = RemerasCarrie.find((remera) => {
+                return remera.modelo === nombreModelo.toLowerCase() && remera.talle === talle.toLowerCase() && remera.color === color.toLowerCase()
+            });
+            if (itemElegido) {
+                const itemCarrito = {
+                    nombre: itemElegido.nombre,
+                    talle: talle,
+                    color: color,
+                    cantidad: cantidad,
+                    precioUnitario: itemElegido.precio,
+                    subtotal: cantidad * itemElegido.precio
+                };
 
-                        // Agregar el producto al carrito
-                        carrito.push(carrito + itemCarrito);
+                // Agregar el producto al carrito
+                carrito.push(carrito + itemCarrito);
 
-                        alert(`Agregaste al carrito: Producto: ${itemCarrito.nombre}, Talla: ${talle}, Color: ${color}, Cantidad: ${cantidad}`);
-                    } else {
-                        alert("El producto seleccionado no existe en el catálogo.");
-                    }
+                alert(`Agregaste al carrito: Producto: ${itemCarrito.nombre}, Talla: ${talle}, Color: ${color}, Cantidad: ${cantidad}`);
+            } else {
+                alert("El producto seleccionado no existe en el catálogo.");
+            }
             break;
-                    
-        case CHUCKY:
+
+            case CHUCKY:
             talle = prompt(`Perfecto! Dentro de las remeras de ${RemerasChucky[0].modelo} tenemos para ofrecerte
                     Talle:\n ${RemerasChucky[0].talle} / ${RemerasChucky[2].talle} / ${RemerasChucky[4].talle} \n Ingresá la letra del talle elegido`);
-                    color = prompt(`Genial, enviaremos el talle ${talle}. Es momento de elegir el color de tu remera!\n ${RemerasChucky[0].color} / ${RemerasChucky[2].color}\n Ingresá el color que deseas agregar al carrito`);
-                    cantidad = +prompt(`Cuántas remeras de ${nombreModelo}, color ${color}, talle ${talle} deseas agregar al carrito?`);
-                    itemElegido = RemerasArt.find((remera) => {
-                        return remera.modelo === nombreModelo.toLowerCase() && remera.talle === talle.toLowerCase() && remera.color === color.toLowerCase()
-                    });
-                    if (itemElegido) {
-                        const itemCarrito = {
-                            nombre: itemElegido.nombre,
-                            talle: talle,
-                            color: color,
-                            cantidad: cantidad,
-                            precioUnitario: itemElegido.precio,
-                            subtotal: cantidad * itemElegido.precio
-                        };
+            color = prompt(`Genial, enviaremos el talle ${talle}. Es momento de elegir el color de tu remera!\n ${RemerasChucky[0].color} / ${RemerasChucky[2].color}\n Ingresá el color que deseas agregar al carrito`);
+            cantidad = +prompt(`Cuántas remeras de ${nombreModelo}, color ${color}, talle ${talle} deseas agregar al carrito?`);
+            itemElegido = RemerasChucky.find((remera) => {
+                return remera.modelo === nombreModelo.toLowerCase() && remera.talle === talle.toLowerCase() && remera.color === color.toLowerCase()
+            });
+            if (itemElegido) {
+                const itemCarrito = {
+                    nombre: itemElegido.nombre,
+                    talle: talle,
+                    color: color,
+                    cantidad: cantidad,
+                    precioUnitario: itemElegido.precio,
+                    subtotal: cantidad * itemElegido.precio
+                };
 
-                        // Agregar el producto al carrito
-                        carrito.push(carrito + itemCarrito);
+                // Agregar el producto al carrito
+                carrito.push(carrito + itemCarrito);
 
-                        alert(`Agregaste al carrito: Producto: ${itemCarrito.nombre}, Talla: ${talle}, Color: ${color}, Cantidad: ${cantidad}`);
-                    } else {
-                        alert("El producto seleccionado no existe en el catálogo.");
-                    } 
-                break;
-                }}
+                alert(`Agregaste al carrito: Producto: ${itemCarrito.nombre}, Talla: ${talle}, Color: ${color}, Cantidad: ${cantidad}`);
+            } else {
+                alert("El producto seleccionado no existe en el catálogo.");
+            }
+            break;
+            case IT:
+            talle = prompt(`Perfecto! Dentro de las remeras de ${RemerasIt[0].modelo} tenemos para ofrecerte
+                    Talle:\n ${RemerasIt[0].talle} / ${RemerasIt[2].talle} / ${RemerasIt[4].talle} \n Ingresá la letra del talle elegido`);
+            color = prompt(`Genial, enviaremos el talle ${talle}. Es momento de elegir el color de tu remera!\n ${RemerasIt[0].color} / ${RemerasIt[1].color} / ${RemerasIt[2].color}\n Ingresá el color que deseas agregar al carrito`);
+            cantidad = +prompt(`Cuántas remeras de ${nombreModelo}, color ${color}, talle ${talle} deseas agregar al carrito?`);
+            itemElegido = RemerasIt.find((remera) => {
+                return remera.modelo === nombreModelo.toLowerCase() && remera.talle === talle.toLowerCase() && remera.color === color.toLowerCase()
+            });
+            if (itemElegido) {
+                const itemCarrito = {
+                    nombre: itemElegido.nombre,
+                    talle: talle,
+                    color: color,
+                    cantidad: cantidad,
+                    precioUnitario: itemElegido.precio,
+                    subtotal: cantidad * itemElegido.precio
+                };
 
-        
+                // Agregar el producto al carrito
+                carrito.push(carrito + itemCarrito);
+
+                alert(`Agregaste al carrito: Producto: ${itemCarrito.nombre}, Talla: ${talle}, Color: ${color}, Cantidad: ${cantidad}`);
+            } else {
+                alert("El producto seleccionado no existe en el catálogo.");
+            }
+            break;
+        default:
+            alert('El producto ingresado no existe, por favor vuelva a ingresar una opcion valida.')}
+            //parecen estar mal añadidos los switch, revisar eso mañana
+
+    continuar = prompt(`Desea seguir agregando productos al carrito?\nsi/no`);
+    continuar = validacionSiNo(continuar);
+} while (continuar === SI);
+console.log(carrito);
+
 
 
 //         //case BUZO:
