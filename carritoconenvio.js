@@ -74,9 +74,11 @@ do {
     alert (`Agregaste a tu carrito ${Tazas [nombreProducto-1].nombre} - ${cantidad} unidad/es - A valor unitario de ${Tazas [nombreProducto-1].precio} Subtotal $${Tazas[nombreProducto-1].precio*cantidad}`);
 
     detalle = `${Tazas [nombreProducto-1].nombre}         ${cantidad}             ${Tazas [nombreProducto-1].precio}               ${Tazas[nombreProducto-1].precio*cantidad}\n`;
+
     detalleProductos = detalleProductos + detalle;
+    
     continuar = prompt('Desea salir? si/no');
-    validacionSiNo (continuar.toLowerCase);
+    validacionSiNo (continuar.toLowerCase());
     }
 while (continuar != 'si');
 
@@ -85,7 +87,7 @@ const total = carrito.reduce((acumulador, item) => acumulador + (item.producto.p
 alert(`${detalleProductos}\nEl total a pagar de su compra es de: $${total}`);
 
 tipoRetiro = prompt(`Quiere retirar su pedido por sucursal o recibirlo en su domicilio?\nIngrese la opción elegida: retiro/envio`);
-tipoRetiro= validacionEnvio(tipoRetiro.toLowerCase);
+tipoRetiro= validacionEnvio(tipoRetiro.toLowerCase());
 if (tipoRetiro == ENVIO) {
     tipoRetiro = alert(`Perfecto! A continuacion podrá ingresar el domicilio donde quiere recibir sus productos. Recuerde que el envío se paga al recibirlo y tiene una tardanza de aprox 5 días habiles`);
     domicilio = prompt(`Por favor ingresá el domicilio donde quiere recibir su pedido:\nCalle XXX, Localidad, cualquier dato de relevancia que considere mencionar`);
