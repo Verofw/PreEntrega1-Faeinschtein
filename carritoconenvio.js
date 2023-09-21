@@ -15,8 +15,8 @@ const RETIRO = `retiro`;
 const ENVIO = `envio`;
 
 function validacionTexto(entrada) {
-    while (entrada == ``) {
-        entrada = prompt(`Respuesta inválida, no se permiten campos vacios. Vuelva a ingresar el dato por favor`)
+    while (!entrada.trim()) {
+        entrada = prompt(`Respuesta inválida, no se permiten campos vacíos. Vuelva a ingresar el dato por favor:`);
     }
     return entrada;
 }
@@ -77,7 +77,7 @@ do {
 
     detalleProductos = detalleProductos + detalle;
     
-    continuar = prompt('Desea salir? si/no');
+    continuar = prompt('Desea finalizar su compra? si/no');
     validacionSiNo (continuar.toLowerCase());
     }
 while (continuar != 'si');
